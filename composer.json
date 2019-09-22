@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "asmoday74\\ckeditor\\": ""
+            "asmoday74\\ckeditor5\\": ""
         }
     }
 }
