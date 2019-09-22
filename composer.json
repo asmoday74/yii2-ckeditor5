@@ -1,0 +1,21 @@
+{
+    "name": "asmoday74/yii2-ckeditor5",
+    "description": "CKEditor 5 WYSIWYG widget for Yii2",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","ckeditor 5"],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Maksim Klimov",
+            "email": "asm@mail-tm.ru"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "~2.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "asmoday74\\ckeditor\\": ""
+        }
+    }
+}
