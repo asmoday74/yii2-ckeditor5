@@ -42,7 +42,13 @@ use asmoday74\ckeditor5\EditorClassic;
 ```php
 use asmoday74\ckeditor5\EditorInline;	//..or EditorBalloon
 ...
-	<?php EditorInline::begin(['name' => 'editor-inline','clientOptions' => ['language' => 'en','uploadUrl' => 'upload']]);?>
+	<?php EditorInline::begin([
+		'name' => 'editor-inline',
+		'clientOptions' => [
+			'language' => 'en',
+			'uploadUrl' => 'upload'
+		]
+	]);?>
 		<h1>The three greatest things you learn from traveling</h1>
 		<p>Like all the great things on earth traveling teaches us by example. 
 		Here are some of the most precious lessons I’ve learned over the years of traveling.</p>
