@@ -50,4 +50,4 @@ use asmoday74\ckeditor5\EditorInline;	//..or EditorBalloon
 	<?php EditorInline::end();?>
 ```
 
-Look for detailed documentation and examples on the official website of CKEDitor 5 https://ckeditor.com/ckeditor-5/
+Look for detailed documentation and examples on the official website of CKEditor 5 https://ckeditor.com/ckeditor-5/
