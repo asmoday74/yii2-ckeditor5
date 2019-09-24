@@ -11,20 +11,23 @@ class EditorBalloon extends CKEditor5
      */
     public $editorType = 'Balloon';
 
+
     /**
      * @inheritdoc
      */
-    protected function registerAssets($view)
+    public function init()
     {
-        BalloonAssets::register($view);
+        parent::init();
+		ob_start();
     }
-
+	
     /**
      * @inheritdoc
      */
     protected function printEditorTag()
     {
-        print Html::tag('div', '', $this->options);
+		$value = ob_get_clean();
+		print Html::tag('div', $value, $this->options);
     }
 
 }

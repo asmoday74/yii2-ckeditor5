@@ -11,20 +11,23 @@ class EditorInline extends CKEditor5
      */
     public $editorType = 'Inline';
 
+
     /**
      * @inheritdoc
      */
-    protected function registerAssets($view)
+    public function init()
     {
-        InlineAssets::register($view);
+        parent::init();
+		ob_start();
     }
-
+	
     /**
      * @inheritdoc
      */
     protected function printEditorTag()
     {
-        print Html::tag('div', 'qweaasd', $this->options);
+		$value = ob_get_clean();
+		print Html::tag('div', $value, $this->options);
     }
 
 }

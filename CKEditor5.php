@@ -2,7 +2,9 @@
 
 namespace asmoday74\ckeditor5;
 
+use Yii;
 use yii\helpers\Json;
+use yii\helpers\Url;
 use yii\web\JsExpression;
 use yii\widgets\InputWidget;
 
@@ -48,17 +50,22 @@ abstract class CKEditor5 extends InputWidget
      */
     protected function registerEditorJS()
     {
-        if (!empty($this->toolbar)) {
+		if (!empty($this->toolbar)) {
             $this->clientOptions['toolbar'] = $this->toolbar;
         }
-        if (!empty($this->uploadUrl)) {
-            $this->clientOptions['ckfinder'] = ['uploadUrl' => $this->uploadUrl];
-        }
+
         $clientOptions = Json::encode($this->clientOptions);
 
         $js = new JsExpression(
-			"if (typeof ".$this->editorType." == 'undefined' || !".$this->editorType") {var ".$this->editorType." = {};} ".
-            $this->editorType . "Editor.create( document.querySelector( '#{$this->options['id']}' ), {$clientOptions} ).catch( error => {console.error( error );} );"
+			"function FileCustomUploadAdapterPlugin( editor ) {
+				editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
+					return new FileUploadAdapter(loader, editor.config);
+				};
+			}
+			var clientOptions = JSON.parse('$clientOptions');
+			clientOptions['extraPlugins'] = [FileCustomUploadAdapterPlugin];
+			if (typeof $this->editorType == 'undefined' || !$this->editorType) {var $this->editorType = {};} ".
+            $this->editorType . "Editor.create(document.querySelector('#{$this->options['id']}'), clientOptions ).catch(error => {console.error(error);});"
         );
         $this->view->registerJs($js);
     }
@@ -66,7 +73,26 @@ abstract class CKEditor5 extends InputWidget
     /**
      * @param \yii\web\View $view
      */
-    protected function registerAssets($view){}
+    protected function registerAssets($view)
+    {
+		$assets = [];
+		switch ($this->editorType) {
+            case 'Classic':
+				$assets = ClassicAssets::register($view);
+			break;
+            case 'Balloon':
+				$assets = BalloonAssets::register($view);
+			break;
+            case 'Inline':
+				$assets = InlineAssets::register($view);
+			break;
+		}
+		
+		if (array_key_exists('language',$this->clientOptions)) {
+			$assets->js[] = 'translations/'.$this->clientOptions['language'].'.js';
+		}
+        CKEditorAssets::register($view);
+    }
 
     /**
      * View tag for editor

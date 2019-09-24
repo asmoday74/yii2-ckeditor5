@@ -10,7 +10,7 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist asmoday74/yii2-ckeditor5 "*"
+composer require --prefer-dist asmoday74/yii2-ckeditor5 "*"
 ```
 
 or add
@@ -25,7 +25,27 @@ to the require section of your `composer.json` file.
 Usage
 -----
 
-Once the extension is installed, simply use it in your code by  :
+Examples of using:
 
 ```php
-<?= \asmoday74\ckeditor5\AutoloadExample::widget(); ?>```
+use asmoday74\ckeditor5\EditorClassic;
+...
+	<?= $form->field($model, 'content')->widget(EditorClassic::className(),[
+			'clientOptions' => [
+				'language' => 'en',
+				'uploadUrl' => 'upload', 	//url for upload files
+				'uploadField' => 'image',	//field name in the upload form
+			]
+	]); ?>
+```
+
+```php
+use asmoday74\ckeditor5\EditorInline;	//..or EditorBalloon
+...
+	<?php EditorInline::begin(['name' => 'editor-inline','clientOptions' => ['language' => 'en','uploadUrl' => 'upload']]);?>
+		<h1>The three greatest things you learn from traveling</h1>
+		<p>
+		Like all the great things on earth traveling teaches us by example. Here are some of the most precious lessons I’ve learned over the years of traveling.
+		</p>
+	<?php EditorInline::end();?>
+```

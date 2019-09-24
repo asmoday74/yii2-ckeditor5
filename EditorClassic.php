@@ -14,14 +14,6 @@ class EditorClassic extends CKEditor5
     /**
      * @inheritdoc
      */
-    protected function registerAssets($view)
-    {
-        ClassicAssets::register($view);
-    }
-
-    /**
-     * @inheritdoc
-     */
     protected function printEditorTag()
     {
         if ($this->hasModel()) {
