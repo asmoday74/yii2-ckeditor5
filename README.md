@@ -31,11 +31,11 @@ Examples of using:
 use asmoday74\ckeditor5\EditorClassic;
 ...
 	<?= $form->field($model, 'content')->widget(EditorClassic::className(),[
-			'clientOptions' => [
-				'language' => 'en',
-				'uploadUrl' => 'upload', 	//url for upload files
-				'uploadField' => 'image',	//field name in the upload form
-			]
+		'clientOptions' => [
+			'language' => 'en',
+			'uploadUrl' => 'upload', 	//url for upload files
+			'uploadField' => 'image',	//field name in the upload form
+		]
 	]); ?>
 ```
 
@@ -49,3 +49,5 @@ use asmoday74\ckeditor5\EditorInline;	//..or EditorBalloon
 		</p>
 	<?php EditorInline::end();?>
 ```
+
+Look for detailed documentation and examples on the official website of CKEDitor 5 https://ckeditor.com/ckeditor-5/
